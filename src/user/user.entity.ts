@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
+import { AppointmentEntity } from 'src/appointment/appointment.entity';
 import { RoleEntity } from '../role/role.entity';
 import {
   Column,
@@ -9,6 +10,7 @@ import {
   CreateDateColumn,
   JoinTable,
   ManyToMany,
+  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -37,4 +39,7 @@ export class UserEntity {
   @ManyToMany(() => RoleEntity, (role) => role.users)
   @JoinTable()
   roles: RoleEntity[];
+
+  @OneToMany(() => AppointmentEntity, (appointment) => appointment.user)
+  appointments: AppointmentEntity[];
 }
